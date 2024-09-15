@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.schedule {
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule > div {
+    width: 48%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+td:nth-child(4) {
+    text-align: center;
+}
+
+    </style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Schedule</h1>
+        <div class="schedule">
+            <div class="departure">
+                <h2>Departures</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flight</th>
+                            <th>Destination</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in data_dep %}
+                        {% if user != 'None' %}
+                            <tr id="{{ i.0 }}" onclick="details(this.id)">
+                        {% endif %}
+                            <td>{{ i.0 }}</td>
+                            <td>{{ i.1 }}</td>
+                            <td>{{ i.2 }}</td>
+                            <td>On Time</td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Add more departure rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="arrival">
+                <h2>Arrivals</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flight</th>
+                            <th>Origin</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in data_arr %}
+                        {% if user != 'None' %}
+                            <tr id="{{ i.0 }}" onclick="details(this.id)">
+                        {% endif %}
+                            <td>{{ i.0 }}</td>
+                            <td>{{ i.1 }}</td>
+                            <td>{{ i.2 }}</td>
+                            <td>On Time</td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Add more arrival rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function details(id){
+        window.location.href=`/flight details/details/${id}`
+    }
+</script>
+</html>

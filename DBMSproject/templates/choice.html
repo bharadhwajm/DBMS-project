@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.details {
+    display: none;
+}
+
+.details.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+.insert{
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crew and Ground Staff Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Crew and Ground Staff Details</h1>
+        <div class="navigation">
+            <button id="showCrew">Show Cabin Crew</button>
+            <button id="showGroundStaff">Show Ground Staff</button>
+            <button id="showPassengers">Show Passengers</button>
+        </div>
+        <div id="crew" class="details active">
+            <h2>Cabin Crew Members</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data_crew %}
+                    <tr>
+                        <td>{{ i.0 }}</td>
+                        <td>{{ i.1 }}</td>
+                    </tr>
+                    {% endfor %}
+                    <!-- Add more crew rows as needed -->
+                </tbody>
+
+            </table>
+            <div class="insert">
+            <button id="insertCrewstaff" ><a href="{% url 'insertcrew' %}" >Insert Cabin Crew Member</a></button>
+            </div>
+        </div>
+        <div id="groundStaff" class="details hidden">
+            <h2>Ground Staff Members</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody style="padding-bottom: 15px;">
+                    {% for i in data_grd %}
+                    <tr>
+                        <td>{{ i.0 }}</td>
+                        <td>{{ i.1 }}</td>
+                    </tr>
+                    {% endfor %}
+                    <!-- Add more ground staff rows as needed -->
+                </tbody>
+            </table>
+            <div class="insert">
+            <button id="insertgrdstaff" ><a href="{% url 'insertgrdemp' %}">Insert Ground Staff</a></button>
+            </div>
+        </div>
+        <div id="passengers" class="details hidden">
+            <h2>Passengers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Passenger ID</th>
+                        <th>Name</th>
+                        <th>Seat number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data_passengers %}
+                    <tr>
+                        <td>{{ i.0 }}</td>
+                        <td>{{ i.1 }}</td>
+                        <td>{{ i.2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+    </div>
+    <script>
+    document.getElementById('showCrew').addEventListener('click', function() {
+        document.getElementById('crew').classList.add('active');
+        document.getElementById('groundStaff').classList.remove('active');
+        document.getElementById('passengers').classList.remove('active');
+    });
+
+    document.getElementById('showGroundStaff').addEventListener('click', function() {
+        document.getElementById('groundStaff').classList.add('active');
+        document.getElementById('crew').classList.remove('active');
+        document.getElementById('passengers').classList.remove('active');
+    });
+
+    document.getElementById('showPassengers').addEventListener('click', function() {
+        document.getElementById('passengers').classList.add('active');
+        document.getElementById('crew').classList.remove('active');
+        document.getElementById('groundStaff').classList.remove('active');
+    });
+    </script>
+</body>
+</html>
