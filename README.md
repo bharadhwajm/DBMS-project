@@ -1,7 +1,8 @@
 # DBMS-project
 Introduction
 
-The Airport Management System is a web-based application designed to manage the operations of an airport, including flight arrivals and departures, crew members, and ground staff management. It provides a user-friendly interface for administrators to manage day-to-day airport activities efficiently. Features
+The Airport Management System is a web-based application designed to manage the operations of an airport, including flight arrivals and departures, crew members, and ground staff management. It provides a user-friendly interface for administrators to manage day-to-day airport activities efficiently.
+Features
 
 Manage flight arrivals and departures.
 Assign crew members to flights.
